@@ -1,0 +1,8 @@
+host: localhost:3333
+info:
+  contact: {}
+  description: An API documentation for Practicing Go Gin framework by Veoscript.
+  title: Go Gin CRUD API
+  version: "1.0"
+paths: {}
+swagger: "2.0"
