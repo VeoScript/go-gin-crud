@@ -10,4 +10,5 @@ func Blogs(route *gin.RouterGroup) {
 	route.GET("/:id", controllers.GetBlogById)
 	route.POST("/", controllers.CreateBlog)
 	route.PATCH("/:id", controllers.UpdateBlog)
+	route.DELETE("/:id", controllers.DeleteBlog)
 }
