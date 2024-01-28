@@ -26,6 +26,7 @@ func main() {
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	v1 := router.Group("/api/v1")
+
 	{
 		routes.Blogs(v1.Group("/blogs"))
 	}

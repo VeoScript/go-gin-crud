@@ -59,7 +59,8 @@ func CreateBlog(c *gin.Context) {
 	// Get data from req body (payload)...
 	var body struct {
 		Title       string
-		Description string
+		Description *string
+		Article     string
 	}
 
 	c.Bind(&body)
@@ -72,9 +73,9 @@ func CreateBlog(c *gin.Context) {
 		return
 	}
 
-	if strings.TrimSpace(body.Description) == "" {
+	if strings.TrimSpace(body.Article) == "" {
 		c.JSON(400, gin.H{
-			"message": "Description is required",
+			"message": "Article is required",
 		})
 		return
 	}
@@ -83,6 +84,7 @@ func CreateBlog(c *gin.Context) {
 	blogs := models.Blog{
 		Title:       body.Title,
 		Description: body.Description,
+		Article:     body.Article,
 	}
 
 	result := DB.Create(&blogs)
@@ -98,5 +100,45 @@ func CreateBlog(c *gin.Context) {
 	// Return response...
 	c.JSON(200, gin.H{
 		"blogs": blogs,
+	})
+}
+
+func UpdateBlog(c *gin.Context) {
+	var DB = initializers.DB
+
+	// Get id by request parameter...
+	id := c.Param("id")
+
+	// Get data from req body (payload)...
+	var body struct {
+		Title       string
+		Description *string
+		Article     string
+	}
+
+	c.Bind(&body)
+
+	// Find the blog were updating...
+	var blog models.Blog
+	DB.First(&blog, id)
+
+	// Update specific blog...
+	result := DB.Model(&blog).Updates(&models.Blog{
+		Title:       body.Title,
+		Description: body.Description,
+		Article:     body.Article,
+	})
+
+	// Error handler...
+	if result.Error != nil {
+		c.JSON(400, gin.H{
+			"message": result.Error,
+		})
+		return
+	}
+
+	// Return response...
+	c.JSON(200, gin.H{
+		"blog": blog,
 	})
 }
