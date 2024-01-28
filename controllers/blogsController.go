@@ -17,8 +17,8 @@ func GetBlogs(c *gin.Context) {
 
 	// Error handler...
 	if result.Error != nil {
-		c.JSON(400, gin.H{
-			"message": result.Error,
+		c.JSON(500, gin.H{
+			"message": result.Error.Error(),
 		})
 		return
 	}
@@ -41,8 +41,8 @@ func GetBlogById(c *gin.Context) {
 
 	// Error handler...
 	if result.Error != nil {
-		c.JSON(400, gin.H{
-			"message": result.Error,
+		c.JSON(500, gin.H{
+			"message": result.Error.Error(),
 		})
 		return
 	}
@@ -91,8 +91,8 @@ func CreateBlog(c *gin.Context) {
 
 	// Error handler...
 	if result.Error != nil {
-		c.JSON(400, gin.H{
-			"message": result.Error,
+		c.JSON(500, gin.H{
+			"message": result.Error.Error(),
 		})
 		return
 	}
@@ -131,8 +131,8 @@ func UpdateBlog(c *gin.Context) {
 
 	// Error handler...
 	if result.Error != nil {
-		c.JSON(400, gin.H{
-			"message": result.Error,
+		c.JSON(500, gin.H{
+			"message": result.Error.Error(),
 		})
 		return
 	}
@@ -140,5 +140,29 @@ func UpdateBlog(c *gin.Context) {
 	// Return response...
 	c.JSON(200, gin.H{
 		"blog": blog,
+	})
+}
+
+func DeleteBlog(c *gin.Context) {
+	var DB = initializers.DB
+
+	// Get id by request parameter...
+	id := c.Param("id")
+
+	// Delete specific blog...
+	var blog models.Blog
+	result := DB.Delete(&blog, id)
+
+	// Error handler...
+	if result.Error != nil {
+		c.JSON(500, gin.H{
+			"message": result.Error.Error(),
+		})
+		return
+	}
+
+	// Return response...
+	c.JSON(200, gin.H{
+		"message": "Deleted Sucessfully.",
 	})
 }
