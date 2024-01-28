@@ -8,7 +8,52 @@ import (
 	"github.com/veoscript/go-gin-crud/models"
 )
 
-func BlogsCreate(c *gin.Context) {
+func GetBlogs(c *gin.Context) {
+	var DB = initializers.DB
+
+	// Get all blogs...
+	var blogs []models.Blog
+	result := DB.Find(&blogs)
+
+	// Error handler...
+	if result.Error != nil {
+		c.JSON(400, gin.H{
+			"message": result.Error,
+		})
+		return
+	}
+
+	// Return response...
+	c.JSON(200, gin.H{
+		"blogs": blogs,
+	})
+}
+
+func GetBlogById(c *gin.Context) {
+	var DB = initializers.DB
+
+	// Get id by request parameter...
+	id := c.Param("id")
+
+	// Get blog by id...
+	var blog models.Blog
+	result := DB.First(&blog, id)
+
+	// Error handler...
+	if result.Error != nil {
+		c.JSON(400, gin.H{
+			"message": result.Error,
+		})
+		return
+	}
+
+	// Return response...
+	c.JSON(200, gin.H{
+		"blog": blog,
+	})
+}
+
+func CreateBlog(c *gin.Context) {
 	var DB = initializers.DB
 
 	// Get data from req body (payload)...
