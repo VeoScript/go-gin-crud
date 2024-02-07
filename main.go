@@ -28,6 +28,7 @@ func main() {
 	v1 := router.Group("/api/v1")
 
 	{
+		routes.Users(v1.Group("/users"))
 		routes.Blogs(v1.Group("/blogs"))
 	}
 
