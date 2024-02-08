@@ -13,7 +13,7 @@ func GetBlogs(c *gin.Context) {
 
 	// Get all blogs...
 	var blogs []models.Blog
-	result := DB.Find(&blogs)
+	result := DB.Order("id desc, title desc").Find(&blogs)
 
 	// Error handler...
 	if result.Error != nil {
