@@ -12,5 +12,5 @@ func init() {
 
 func main() {
 	var DB = initializers.DB
-	DB.AutoMigrate(&models.User{})
+	DB.AutoMigrate(&models.Blog{})
 }

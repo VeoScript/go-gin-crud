@@ -58,6 +58,7 @@ func CreateBlog(c *gin.Context) {
 
 	// Get data from req body (payload)...
 	var body struct {
+		Image       *string
 		Title       string
 		Description *string
 		Article     string
@@ -82,6 +83,7 @@ func CreateBlog(c *gin.Context) {
 
 	// Create blog...
 	blogs := models.Blog{
+		Image:       body.Image,
 		Title:       body.Title,
 		Description: body.Description,
 		Article:     body.Article,
@@ -111,6 +113,7 @@ func UpdateBlog(c *gin.Context) {
 
 	// Get data from req body (payload)...
 	var body struct {
+		Image       *string
 		Title       string
 		Description *string
 		Article     string
@@ -124,6 +127,7 @@ func UpdateBlog(c *gin.Context) {
 
 	// Update specific blog...
 	result := DB.Model(&blog).Updates(&models.Blog{
+		Image:       body.Image,
 		Title:       body.Title,
 		Description: body.Description,
 		Article:     body.Article,
