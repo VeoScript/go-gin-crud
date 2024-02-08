@@ -46,7 +46,7 @@ func main() {
 	v1 := router.Group("/api/v1")
 
 	{
-		routes.Users(v1.Group("/auth"))
+		routes.Auth(v1.Group("/auth"))
 		routes.Blogs(v1.Group("/blogs"))
 	}
 
