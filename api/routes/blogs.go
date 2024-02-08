@@ -3,12 +3,13 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/veoscript/go-gin-crud/controllers"
+	"github.com/veoscript/go-gin-crud/middlewares"
 )
 
 func Blogs(route *gin.RouterGroup) {
-	route.GET("/", controllers.GetBlogs)
-	route.GET("/:id", controllers.GetBlogById)
-	route.POST("/", controllers.CreateBlog)
-	route.PATCH("/:id", controllers.UpdateBlog)
-	route.DELETE("/:id", controllers.DeleteBlog)
+	route.GET("/all", middlewares.RequireAuth, controllers.GetBlogs)
+	route.GET("/:id", middlewares.RequireAuth, controllers.GetBlogById)
+	route.POST("/", middlewares.RequireAuth, controllers.CreateBlog)
+	route.PATCH("/:id", middlewares.RequireAuth, controllers.UpdateBlog)
+	route.DELETE("/:id", middlewares.RequireAuth, controllers.DeleteBlog)
 }

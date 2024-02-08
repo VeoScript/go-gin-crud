@@ -24,9 +24,7 @@ func GetBlogs(c *gin.Context) {
 	}
 
 	// Return response...
-	c.JSON(200, gin.H{
-		"blogs": blogs,
-	})
+	c.JSON(200, blogs)
 }
 
 func GetBlogById(c *gin.Context) {
@@ -48,9 +46,7 @@ func GetBlogById(c *gin.Context) {
 	}
 
 	// Return response...
-	c.JSON(200, gin.H{
-		"blog": blog,
-	})
+	c.JSON(200, blog)
 }
 
 func CreateBlog(c *gin.Context) {
@@ -100,9 +96,7 @@ func CreateBlog(c *gin.Context) {
 	}
 
 	// Return response...
-	c.JSON(200, gin.H{
-		"blogs": blogs,
-	})
+	c.JSON(200, blogs)
 }
 
 func UpdateBlog(c *gin.Context) {
@@ -142,9 +136,7 @@ func UpdateBlog(c *gin.Context) {
 	}
 
 	// Return response...
-	c.JSON(200, gin.H{
-		"blog": blog,
-	})
+	c.JSON(200, blog)
 }
 
 func DeleteBlog(c *gin.Context) {

@@ -6,7 +6,7 @@ import (
 	"github.com/veoscript/go-gin-crud/middlewares"
 )
 
-func Users(route *gin.RouterGroup) {
+func Auth(route *gin.RouterGroup) {
 	route.POST("/signup", controllers.SignUp)
 	route.POST("/signin", controllers.SignIn)
 	route.GET("/validate", middlewares.RequireAuth, controllers.Validate)
