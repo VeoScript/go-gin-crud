@@ -80,7 +80,7 @@ function SignupComponent() {
           <input
             type="text"
             id="name"
-            className="w-full p-3 outline-none rounded-xl border border-neutral-300 bg-transparent focus:border-blue-300"
+            className="w-full p-3 outline-none rounded-xl border border-neutral-700 bg-transparent focus:border-blue-300"
             value={name}
             onChange={(e) => {
               setSignUpFormErrors([]);
@@ -100,7 +100,7 @@ function SignupComponent() {
           <input
             type="text"
             id="email"
-            className="w-full p-3 outline-none rounded-xl border border-neutral-300 bg-transparent focus:border-blue-300"
+            className="w-full p-3 outline-none rounded-xl border border-neutral-700 bg-transparent focus:border-blue-300"
             value={email}
             onChange={(e) => {
               setSignUpFormErrors([]);
@@ -120,7 +120,7 @@ function SignupComponent() {
           <input
             type="password"
             id="password"
-            className="w-full p-3 outline-none rounded-xl border border-neutral-300 bg-transparent focus:border-blue-300"
+            className="w-full p-3 outline-none rounded-xl border border-neutral-700 bg-transparent focus:border-blue-300"
             value={password}
             onChange={(e) => {
               setSignUpFormErrors([]);
@@ -140,7 +140,7 @@ function SignupComponent() {
           <input
             type="password"
             id="repassword"
-            className="w-full p-3 outline-none rounded-xl border border-neutral-300 bg-transparent focus:border-blue-300"
+            className="w-full p-3 outline-none rounded-xl border border-neutral-700 bg-transparent focus:border-blue-300"
             value={repassword}
             onChange={(e) => {
               setSignUpFormErrors([]);
