@@ -23,3 +23,21 @@ export const useSignUpMutation = () => {
     },
   });
 };
+
+export const useSignInMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (_args: { email: string; password: string }) => {
+      return await api.post("/auth/signin", {
+        Email: _args.email,
+        Password: _args.password,
+      });
+    },
+    onError: (error: any) => {
+      console.error("ERROR SIGN IN", error);
+    },
+    onSuccess: async () => {
+      queryClient.resetQueries();
+    },
+  });
+};
