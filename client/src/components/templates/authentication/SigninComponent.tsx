@@ -74,7 +74,7 @@ function SigninComponent() {
           <input
             type="text"
             id="email"
-            className="w-full p-3 outline-none rounded-xl border border-neutral-300 bg-transparent focus:border-blue-300"
+            className="w-full p-3 outline-none rounded-xl border border-neutral-700 bg-transparent focus:border-blue-300"
             value={email}
             onChange={(e) => {
               setSignInFormErrors([]);
@@ -94,7 +94,7 @@ function SigninComponent() {
           <input
             type="password"
             id="password"
-            className="w-full p-3 outline-none rounded-xl border border-neutral-300 bg-transparent focus:border-blue-300"
+            className="w-full p-3 outline-none rounded-xl border border-neutral-700 bg-transparent focus:border-blue-300"
             value={password}
             onChange={(e) => {
               setSignInFormErrors([]);
