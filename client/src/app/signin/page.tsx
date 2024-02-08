@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import SignupComponent from "~/components/templates/authentication/SignupComponent";
+import SigninComponent from "~/components/templates/authentication/SigninComponent";
 
-export default function SignUp() {
+export default function SignIn() {
   if (cookies().has(`${process.env.COOKIE_NAME}`)) redirect("/");
-  return <SignupComponent />;
+  return <SigninComponent />;
 }

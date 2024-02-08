@@ -8,6 +8,6 @@ import (
 
 func Users(route *gin.RouterGroup) {
 	route.POST("/signup", controllers.SignUp)
-	route.POST("/login", controllers.Login)
+	route.POST("/signin", controllers.SignIn)
 	route.GET("/validate", middlewares.RequireAuth, controllers.Validate)
 }

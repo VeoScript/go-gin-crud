@@ -13,6 +13,27 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+func GenerateToken(c *gin.Context, user *models.User) {
+	// Generate a jwt token...
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"sub": user.ID,
+		"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
+	})
+
+	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET_KEY")))
+
+	if err != nil {
+		c.JSON(400, gin.H{
+			"message": "Failed to create token.",
+		})
+		return
+	}
+
+	// Create cookie...
+	c.SetSameSite(http.SameSiteLaxMode)
+	c.SetCookie("GoGinCrudAuth", tokenString, 3600*24*30, "", "", false, true)
+}
+
 func SignUp(c *gin.Context) {
 	var DB = initializers.DB
 
@@ -47,6 +68,18 @@ func SignUp(c *gin.Context) {
 		return
 	}
 
+	// Check existing user by email...
+	var checkUser models.User
+
+	DB.First(&checkUser, "email = ?", body.Email)
+
+	if checkUser.ID != 0 {
+		c.JSON(400, gin.H{
+			"message": "Account is not available.",
+		})
+		return
+	}
+
 	// Hash the password...
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
 
@@ -75,13 +108,16 @@ func SignUp(c *gin.Context) {
 		return
 	}
 
+	// Generate Token...
+	GenerateToken(c, &user)
+
 	// Return response...
 	c.JSON(200, gin.H{
 		"message": "Sign up successfully!",
 	})
 }
 
-func Login(c *gin.Context) {
+func SignIn(c *gin.Context) {
 	var DB = initializers.DB
 
 	// Get the email and password of req body...
@@ -129,24 +165,8 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	// Generate a jwt token...
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"sub": user.ID,
-		"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
-	})
-
-	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET_KEY")))
-
-	if err != nil {
-		c.JSON(400, gin.H{
-			"message": "Failed to create token.",
-		})
-		return
-	}
-
-	// Create cookie...
-	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("GoGinCrudAuth", tokenString, 3600*24*30, "", "", false, true)
+	// Generate Token...
+	GenerateToken(c, &user)
 
 	// Send it back to the client...
 	c.JSON(200, gin.H{
