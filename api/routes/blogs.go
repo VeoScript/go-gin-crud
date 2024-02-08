@@ -9,7 +9,7 @@ import (
 func Blogs(route *gin.RouterGroup) {
 	route.GET("/all", middlewares.RequireAuth, controllers.GetBlogs)
 	route.GET("/:id", middlewares.RequireAuth, controllers.GetBlogById)
-	route.POST("/", middlewares.RequireAuth, controllers.CreateBlog)
+	route.POST("/create", middlewares.RequireAuth, controllers.CreateBlog)
 	route.PATCH("/:id", middlewares.RequireAuth, controllers.UpdateBlog)
 	route.DELETE("/:id", middlewares.RequireAuth, controllers.DeleteBlog)
 }
