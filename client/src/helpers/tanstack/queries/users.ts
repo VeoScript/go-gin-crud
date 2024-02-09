@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "~/config/Axios";
 
+import { UserProps } from "~/shared/interfaces/users";
+
 export const useGetUser = () => {
-  return useQuery({
+  return useQuery<UserProps>({
     queryKey: ["user"],
     queryFn: async () => {
       const user = await api.get(`/auth/validate`);

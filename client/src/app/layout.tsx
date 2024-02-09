@@ -7,6 +7,7 @@ import "./globals.css";
 
 import Providers from "./providers";
 import CheckAuth from "~/components/templates/authentication/CheckAuth";
+import clsx from "clsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <body className={inter.className}>
+        <body className={clsx(inter.className, "text-white bg-neutral-900")}>
           <Toaster position="top-center" />
           <CheckAuth hasCookies={hasAuthCookie} />
           {children}

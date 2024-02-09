@@ -52,7 +52,7 @@ function SignupComponent() {
             setEmail("");
             setPassword("");
             setRepassword("");
-            router.push("/");
+            router.refresh();
           },
         }
       );
