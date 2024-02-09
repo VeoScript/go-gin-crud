@@ -46,7 +46,7 @@ function SigninComponent() {
             setIsSubmitting(false);
             setEmail("");
             setPassword("");
-            router.push("/");
+            router.refresh();
           },
         }
       );
